@@ -2,8 +2,17 @@
 
 #include "Game.h"
 
+Game::Game()
+{
+}
+
 Game::~Game()
 {
+}
+
+void Game::Init()
+{
+    m_pShader = new fw::ShaderProgram( "Data/Basic.vert", "Data/Basic.frag" );
 }
 
 void Game::Update()
