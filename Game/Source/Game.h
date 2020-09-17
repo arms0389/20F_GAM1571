@@ -12,4 +12,5 @@ public:
 
 protected:
     fw::ShaderProgram* m_pShader = nullptr;
+    fw::Mesh* m_pMesh = nullptr;
 };
