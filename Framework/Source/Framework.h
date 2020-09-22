@@ -13,5 +13,6 @@
 #include "Utility/ShaderProgram.h"
 #include "Utility/Helpers.h"
 #include "Mesh.h"
+#include "GameObject.h"
 
 #endif //__Framework_H__

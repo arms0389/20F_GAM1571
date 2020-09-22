@@ -12,5 +12,8 @@ public:
 
 protected:
     fw::ShaderProgram* m_pShader = nullptr;
-    fw::Mesh* m_pMesh = nullptr;
+    fw::Mesh* m_pMeshHuman = nullptr;
+    fw::Mesh* m_pMeshAnimal = nullptr;
+
+    std::vector<fw::GameObject*> m_Objects;
 };

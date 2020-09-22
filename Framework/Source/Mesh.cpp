@@ -1,10 +1,25 @@
 #include "FrameworkPCH.h"
 
 #include "Mesh.h"
+#include "Utility/ShaderProgram.h"
 
 namespace fw {
 
 Mesh::Mesh()
+{
+}
+
+Mesh::Mesh(int primitiveType, int numVertices, float* pVertices)
+{
+    CreateShape( primitiveType, numVertices, pVertices );
+}
+
+Mesh::~Mesh()
+{
+    glDeleteBuffers( 1, &m_VBO );
+}
+
+void Mesh::CreateShape(int primitiveType, int numVertices, float* pVertices)
 {
     // Generate a buffer for our vertex attributes.
     glGenBuffers( 1, &m_VBO ); // m_VBO is a GLuint.
@@ -12,29 +27,18 @@ Mesh::Mesh()
     // Set this VBO to be the currently active one.
     glBindBuffer( GL_ARRAY_BUFFER, m_VBO );
 
-    // Define our triangle as 3 positions.
-    float attribs[] =
-    {
-        0.0f, 0.0f, // Center
-        0.5f, 0.5f, // Top right
-        0.5f, 0.0f, // right center
-        0.5f, -0.5f, // right center
-    };
-
-    m_NumVertices = 4;
-    m_PrimitiveType = GL_POINTS;
+    m_NumVertices = numVertices;
+    m_PrimitiveType = primitiveType;
 
     // Copy our attribute data into the VBO.
     int numAttributeComponents = m_NumVertices*2; // x & y for each vertex.
-    glBufferData( GL_ARRAY_BUFFER, sizeof(float)*numAttributeComponents, attribs, GL_STATIC_DRAW );
+    glBufferData( GL_ARRAY_BUFFER, sizeof(float)*numAttributeComponents, pVertices, GL_STATIC_DRAW );
 }
 
-Mesh::~Mesh()
+void Mesh::Draw(float x, float y, ShaderProgram* pShader)
 {
-}
+    glUseProgram( pShader->GetProgram() );
 
-void Mesh::Draw()
-{
     // Set this VBO to be the currently active one.
     glBindBuffer( GL_ARRAY_BUFFER, m_VBO );
 
