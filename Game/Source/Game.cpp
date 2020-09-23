@@ -2,7 +2,7 @@
 
 #include "Game.h"
 
-Game::Game()
+Game::Game(fw::FWCore* pFramework) : fw::GameCore( pFramework )
 {
 }
 
@@ -16,10 +16,15 @@ Game::~Game()
     {
         delete pObject;
     }
+
+    delete m_pImGuiManager;
 }
 
 void Game::Init()
 {
+    m_pImGuiManager = new fw::ImGuiManager( m_pFramework );
+    m_pImGuiManager->Init();
+
     m_pShader = new fw::ShaderProgram( "Data/Basic.vert", "Data/Basic.frag" );
 
     // Define our triangle as 3 positions.
@@ -49,8 +54,10 @@ void Game::Init()
     m_Objects.push_back( new fw::GameObject( 0.5f,  0.0f, m_pMeshAnimal, m_pShader ) );
 }
 
-void Game::Update()
+void Game::Update(float deltaTime)
 {
+    m_pImGuiManager->StartFrame( deltaTime );
+    ImGui::ShowDemoWindow();
 }
 
 void Game::Draw()
@@ -64,4 +71,6 @@ void Game::Draw()
     {
         pObject->Draw();
     }
+
+    m_pImGuiManager->EndFrame();
 }
