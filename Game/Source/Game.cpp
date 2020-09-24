@@ -37,7 +37,7 @@ void Game::Init()
     };
 
     m_pMeshHuman = new fw::Mesh();
-    m_pMeshHuman->CreateShape( GL_POINTS, 4, &attribsHuman[0] );
+    m_pMeshHuman->CreateShape( GL_TRIANGLES, 4, &attribsHuman[0] );
 
     float attribsAnimal[] =
     {

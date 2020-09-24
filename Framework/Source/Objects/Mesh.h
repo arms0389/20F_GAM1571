@@ -13,6 +13,8 @@ public:
 
     void CreateShape(int primitiveType, int numVertices, float* pVertices);
 
+    void SetUniform1f(ShaderProgram* pShader, char* name, float value);
+
     void Draw(float x, float y, ShaderProgram* pShader);
 
 protected:

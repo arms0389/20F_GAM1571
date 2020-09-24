@@ -2,6 +2,7 @@
 
 #include "Mesh.h"
 #include "Utility/ShaderProgram.h"
+#include "Utility/Helpers.h"
 
 namespace fw {
 
@@ -35,6 +36,12 @@ void Mesh::CreateShape(int primitiveType, int numVertices, float* pVertices)
     glBufferData( GL_ARRAY_BUFFER, sizeof(float)*numAttributeComponents, pVertices, GL_STATIC_DRAW );
 }
 
+void Mesh::SetUniform1f(ShaderProgram* pShader, char* name, float value)
+{
+    int loc = glGetUniformLocation( pShader->GetProgram(), name );
+    glUniform1f( loc, value );
+}
+
 void Mesh::Draw(float x, float y, ShaderProgram* pShader)
 {
     glUseProgram( pShader->GetProgram() );
@@ -48,6 +55,11 @@ void Mesh::Draw(float x, float y, ShaderProgram* pShader)
 
     // Describe the attributes in the VBO to OpenGL.
     glVertexAttribPointer( loc, 2, GL_FLOAT, GL_FALSE, 8, (void*)0 );
+
+    // Setup our uniforms.
+    {
+        SetUniform1f( pShader, "u_Time", (float)GetSystemTimeSinceGameStart() );
+    }
 
     // Draw the primitive.
     glDrawArrays( m_PrimitiveType, 0, m_NumVertices );
