@@ -13,6 +13,8 @@ public:
     virtual void Update(float deltaTime) = 0;
     virtual void Draw() = 0;
 
+    FWCore* GetFramework() { return m_pFramework; }
+
 protected:
     FWCore* m_pFramework;
 };

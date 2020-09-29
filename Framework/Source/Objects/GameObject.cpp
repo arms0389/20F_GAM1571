@@ -5,10 +5,11 @@
 
 namespace fw {
 
-GameObject::GameObject(float x, float y, Mesh* pMesh, ShaderProgram* pShader)
+GameObject::GameObject(GameCore* pGameCore, vec2 pos, Mesh* pMesh, ShaderProgram* pShader)
 {
-    m_PosX = x;
-    m_PosY = y;
+    m_pGameCore = pGameCore;
+
+    m_Position = pos;
 
     m_pMesh = pMesh;
     m_pShader = pShader;
@@ -18,13 +19,13 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::Update()
+void GameObject::Update(float deltaTime)
 {
 }
 
 void GameObject::Draw()
 {
-    m_pMesh->Draw( m_PosX, m_PosY, m_pShader );
+    m_pMesh->Draw( m_Position, m_pShader );
 }
 
 } // namespace fw

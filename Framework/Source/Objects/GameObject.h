@@ -1,22 +1,26 @@
 #pragma once
 
+#include "Math/Vector.h"
+
 namespace fw {
 
 class Mesh;
 class ShaderProgram;
+class GameCore;
 
 class GameObject
 {
 public:
-    GameObject(float x, float y, Mesh* pMesh, ShaderProgram* pShader);
+    GameObject(GameCore* pGameCore, vec2 pos, Mesh* pMesh, ShaderProgram* pShader);
     virtual ~GameObject();
 
-    void Update();
-    void Draw();
+    virtual void Update(float deltaTime);
+    virtual void Draw();
 
 protected:
-    float m_PosX = 0;
-    float m_PosY = 0;
+    GameCore* m_pGameCore = nullptr;
+
+    vec2 m_Position;
 
     Mesh* m_pMesh = nullptr;
     ShaderProgram* m_pShader = nullptr;

@@ -18,10 +18,10 @@ project "Game"
 		"premake5.lua",
 		".gitignore",
 		"GenerateProjectFiles.bat",
+		"readme.txt",
 	}
 
 	includedirs {
-		"Framework/Source",
 		"Game/Source",
 	}
 

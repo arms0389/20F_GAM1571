@@ -12,6 +12,7 @@
 
 #include "Core/GameCore.h"
 #include "Core/FWCore.h"
+#include "Math/Vector.h"
 #include "Objects/GameObject.h"
 #include "Objects/Mesh.h"
 #include "UI/ImGuiManager.h"

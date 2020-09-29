@@ -42,7 +42,13 @@ void Mesh::SetUniform1f(ShaderProgram* pShader, char* name, float value)
     glUniform1f( loc, value );
 }
 
-void Mesh::Draw(float x, float y, ShaderProgram* pShader)
+void Mesh::SetUniform2f(ShaderProgram* pShader, char* name, vec2 value)
+{
+    int loc = glGetUniformLocation( pShader->GetProgram(), name );
+    glUniform2f( loc, value.x, value.y );
+}
+
+void Mesh::Draw(vec2 pos, ShaderProgram* pShader)
 {
     glUseProgram( pShader->GetProgram() );
 
@@ -59,6 +65,7 @@ void Mesh::Draw(float x, float y, ShaderProgram* pShader)
     // Setup our uniforms.
     {
         SetUniform1f( pShader, "u_Time", (float)GetSystemTimeSinceGameStart() );
+        SetUniform2f( pShader, "u_ObjectPos", pos );
     }
 
     // Draw the primitive.
