@@ -1,4 +1,4 @@
-#include "../../Framework/Source/Framework.h"
+#include "GamePCH.h"
 
 #include "Objects/Player.h"
 

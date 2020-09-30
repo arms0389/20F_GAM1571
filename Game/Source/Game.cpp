@@ -1,7 +1,8 @@
-#include "../../Framework/Source/Framework.h"
+#include "GamePCH.h"
 
 #include "Game.h"
 #include "Objects/Player.h"
+#include "Objects/Shapes.h"
 
 Game::Game(fw::FWCore* pFramework) : fw::GameCore( pFramework )
 {
@@ -26,26 +27,14 @@ void Game::Init()
     m_pImGuiManager = new fw::ImGuiManager( m_pFramework );
     m_pImGuiManager->Init();
 
+    // Load some shaders.
     m_pShader = new fw::ShaderProgram( "Data/Basic.vert", "Data/Basic.frag" );
 
-    // Define our triangle as 3 positions.
-    float attribsHuman[] =
-    {
-        -0.25f,  -0.25f, // Center
-         0.25f,   0.25f, // Top right
-         0.25f,  -0.25f, // Right center
-    };
+    // Create some meshes.
+    m_pMeshHuman = new fw::Mesh( meshPrimType_Human, meshNumVerts_Human, meshAttribs_Human );
+    m_pMeshAnimal = new fw::Mesh( meshPrimType_Enemy, meshNumVerts_Enemy, meshAttribs_Enemy );
 
-    m_pMeshHuman = new fw::Mesh();
-    m_pMeshHuman->CreateShape( GL_TRIANGLES, 3, &attribsHuman[0] );
-
-    float attribsAnimal[] =
-    {
-        0.0f, 0.0f, // Center
-    };
-
-    m_pMeshAnimal = new fw::Mesh( GL_POINTS, 1, &attribsAnimal[0] );
-
+    // Create some GameObjects.
     m_Objects.push_back( new Player( this, fw::vec2( 6, 5 ), m_pMeshHuman, m_pShader ) );
     m_Objects.push_back( new fw::GameObject( this, fw::vec2( 0, 0 ), m_pMeshAnimal, m_pShader ) );
     m_Objects.push_back( new fw::GameObject( this, fw::vec2( 10, 10 ), m_pMeshAnimal, m_pShader ) );

@@ -30,6 +30,9 @@ project "Game"
 		"opengl32",
 	}
 
+	pchheader "GamePCH.h"
+	pchsource "Game/Source/WinMain.cpp"
+
 project "Framework"
 	kind		"StaticLib"
 	location	"build/Framework"
@@ -44,3 +47,9 @@ project "Framework"
 	includedirs {
 		"Framework/Source",
 	}
+
+	pchheader "FrameworkPCH.h"
+	pchsource "Framework/Source/Core/FWCore.cpp"
+
+	filter "files:Framework/Libraries/imgui/*.cpp"
+		flags { "NoPCH" }
