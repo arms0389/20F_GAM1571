@@ -35,12 +35,12 @@ void Game::Init()
     m_pMeshAnimal = new fw::Mesh( meshPrimType_Enemy, meshNumVerts_Enemy, meshAttribs_Enemy );
 
     // Create some GameObjects.
-    m_Objects.push_back( new Player( this, fw::vec2( 6, 5 ), m_pMeshHuman, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, fw::vec2( 0, 0 ), m_pMeshAnimal, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, fw::vec2( 10, 10 ), m_pMeshAnimal, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, fw::vec2( 5, 5 ), m_pMeshAnimal, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, fw::vec2( 1, 1 ), m_pMeshAnimal, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, fw::vec2( 1, 9 ), m_pMeshAnimal, m_pShader ) );
+    m_Objects.push_back( new Player( this, vec2( 6, 5 ), m_pMeshHuman, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, vec2( 0, 0 ), m_pMeshAnimal, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, vec2( 10, 10 ), m_pMeshAnimal, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, vec2( 5, 5 ), m_pMeshAnimal, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, vec2( 1, 1 ), m_pMeshAnimal, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, vec2( 1, 9 ), m_pMeshAnimal, m_pShader ) );
 }
 
 void Game::Update(float deltaTime)

@@ -10,10 +10,10 @@ class Mesh
 {
 public:
     Mesh();
-    Mesh(int primitiveType, int numVertices, float* pVertices);
+    Mesh(int primitiveType, int numVertices, const float* pVertices);
     virtual ~Mesh();
 
-    void CreateShape(int primitiveType, int numVertices, float* pVertices);
+    void CreateShape(int primitiveType, int numVertices, const float* pVertices);
 
     void SetUniform1f(ShaderProgram* pShader, char* name, float value);
     void SetUniform2f(ShaderProgram* pShader, char* name, vec2 value);

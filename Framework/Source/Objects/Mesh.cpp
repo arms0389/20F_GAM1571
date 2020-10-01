@@ -10,7 +10,7 @@ Mesh::Mesh()
 {
 }
 
-Mesh::Mesh(int primitiveType, int numVertices, float* pVertices)
+Mesh::Mesh(int primitiveType, int numVertices, const float* pVertices)
 {
     CreateShape( primitiveType, numVertices, pVertices );
 }
@@ -20,7 +20,7 @@ Mesh::~Mesh()
     glDeleteBuffers( 1, &m_VBO );
 }
 
-void Mesh::CreateShape(int primitiveType, int numVertices, float* pVertices)
+void Mesh::CreateShape(int primitiveType, int numVertices, const float* pVertices)
 {
     // Generate a buffer for our vertex attributes.
     glGenBuffers( 1, &m_VBO ); // m_VBO is a GLuint.

@@ -2,7 +2,7 @@
 
 #include "Objects/Player.h"
 
-Player::Player(fw::GameCore* pGameCore, fw::vec2 pos, fw::Mesh* pMesh, fw::ShaderProgram* pShader)
+Player::Player(fw::GameCore* pGameCore, vec2 pos, fw::Mesh* pMesh, fw::ShaderProgram* pShader)
     : fw::GameObject( pGameCore, pos, pMesh, pShader )
 {
 }
@@ -15,7 +15,7 @@ void Player::Update(float deltaTime)
 {
     float speed = 2.0f;
 
-    fw::vec2 dir;
+    vec2 dir;
 
     if( m_pGameCore->GetFramework()->IsKeyDown( 'A' ) )
     {
@@ -34,6 +34,5 @@ void Player::Update(float deltaTime)
         dir.y = -1;
     }
 
-    m_Position.x += dir.x * speed * deltaTime;
-    m_Position.y += dir.y * speed * deltaTime;
+    m_Position += dir * speed * deltaTime;
 }
