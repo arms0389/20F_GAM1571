@@ -2,12 +2,15 @@
 
 #include "GameObject.h"
 #include "Mesh.h"
+#include "../../Libraries/imgui/imgui.h"
 
 namespace fw {
 
-GameObject::GameObject(GameCore* pGameCore, vec2 pos, Mesh* pMesh, ShaderProgram* pShader)
+GameObject::GameObject(GameCore* pGameCore, std::string name, vec2 pos, Mesh* pMesh, ShaderProgram* pShader)
 {
     m_pGameCore = pGameCore;
+
+    m_Name = name;
 
     m_Position = pos;
 

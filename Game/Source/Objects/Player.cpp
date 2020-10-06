@@ -2,8 +2,8 @@
 
 #include "Objects/Player.h"
 
-Player::Player(fw::GameCore* pGameCore, vec2 pos, fw::Mesh* pMesh, fw::ShaderProgram* pShader)
-    : fw::GameObject( pGameCore, pos, pMesh, pShader )
+Player::Player(fw::GameCore* pGameCore, std::string name, vec2 pos, fw::Mesh* pMesh, fw::ShaderProgram* pShader)
+    : fw::GameObject( pGameCore, name, pos, pMesh, pShader )
 {
 }
 
