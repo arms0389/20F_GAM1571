@@ -6,10 +6,12 @@ class Event
 {
 public:
     Event();
-    ~Event();
+    virtual ~Event();
+
+    std::string GetType() { return m_EventType; }
 
 protected:
-
+    std::string m_EventType = "BaseEvent";
 };
 
 } // namespace fw

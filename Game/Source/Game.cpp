@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Objects/Player.h"
 #include "Objects/Shapes.h"
+#include "Events/GameEvents.h"
 
 Game::Game(fw::FWCore* pFramework) : fw::GameCore( pFramework )
 {
@@ -19,6 +20,7 @@ Game::~Game()
         delete pObject;
     }
 
+    delete m_pEventManager;
     delete m_pImGuiManager;
 }
 
@@ -26,6 +28,8 @@ void Game::Init()
 {
     m_pImGuiManager = new fw::ImGuiManager( m_pFramework );
     m_pImGuiManager->Init();
+
+    m_pEventManager = new fw::EventManager();
 
     // Load some shaders.
     m_pShader = new fw::ShaderProgram( "Data/Basic.vert", "Data/Basic.frag" );
@@ -43,24 +47,40 @@ void Game::Init()
     m_Objects.push_back( new fw::GameObject( this, "Enemy 5", vec2( 1, 9 ), m_pMeshAnimal, m_pShader ) );
 }
 
+void Game::OnEvent(fw::Event* pEvent)
+{
+    if( pEvent->GetType() == "RemoveFromGameEvent" )
+    {
+        RemoveFromGameEvent* pRemoveFromGameEvent = static_cast<RemoveFromGameEvent*>( pEvent );
+        fw::GameObject* pObject = pRemoveFromGameEvent->GetGameObject();
+
+        auto it = std::find( m_Objects.begin(), m_Objects.end(), pObject );
+        m_Objects.erase( it );
+
+        delete pObject;
+    }
+}
+
 void Game::Update(float deltaTime)
 {
     // Process our events.
-    //m_pEventManager->DispatchAllEvents();
+    m_pEventManager->DispatchAllEvents( this );
 
     m_pImGuiManager->StartFrame( deltaTime );
     ImGui::ShowDemoWindow();
 
-    for( fw::GameObject* pObject : m_Objects )
+    for( auto it = m_Objects.begin(); it != m_Objects.end(); it++ )
     {
+        fw::GameObject* pObject = *it;
+
         pObject->Update( deltaTime );
 
         ImGui::PushID( pObject );
-        ImGui::Text( "Name: %s", pObject->GetName() );
+        ImGui::Text( "Name: %s", pObject->GetName().c_str() );
         ImGui::SameLine();
         if( ImGui::Button( "Delete" ) )
         {
-            //m_pEventManager->AddEvent( new RemoveFromGameEvent( pObject ) );
+            m_pEventManager->AddEvent( new RemoveFromGameEvent( pObject ) );
         }
         ImGui::PopID();
     }
@@ -73,8 +93,10 @@ void Game::Draw()
 
     glPointSize( 10 );
     
-    for( fw::GameObject* pObject : m_Objects )
+    for( auto it = m_Objects.begin(); it != m_Objects.end(); it++ )
     {
+        fw::GameObject* pObject = *it;
+
         pObject->Draw();
     }
 

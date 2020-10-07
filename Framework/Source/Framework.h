@@ -12,6 +12,8 @@
 
 #include "Core/GameCore.h"
 #include "Core/FWCore.h"
+#include "EventSystem/Event.h"
+#include "EventSystem/EventManager.h"
 #include "Math/Vector.h"
 #include "Objects/GameObject.h"
 #include "Objects/Mesh.h"

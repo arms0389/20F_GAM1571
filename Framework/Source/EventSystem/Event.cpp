@@ -2,10 +2,14 @@
 
 #include "Event.h"
 
-fw::Event::Event()
+namespace fw {
+
+Event::Event()
 {
 }
 
-fw::Event::~Event()
+Event::~Event()
 {
 }
+
+} // namespace fw
