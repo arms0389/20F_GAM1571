@@ -8,10 +8,9 @@ public:
     Event();
     virtual ~Event();
 
-    std::string GetType() { return m_EventType; }
+    virtual const char* GetType() = 0;
 
 protected:
-    std::string m_EventType = "BaseEvent";
 };
 
 } // namespace fw

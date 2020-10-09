@@ -49,7 +49,7 @@ void Game::Init()
 
 void Game::OnEvent(fw::Event* pEvent)
 {
-    if( pEvent->GetType() == "RemoveFromGameEvent" )
+    if( pEvent->GetType() == RemoveFromGameEvent::GetStaticEventType() )
     {
         RemoveFromGameEvent* pRemoveFromGameEvent = static_cast<RemoveFromGameEvent*>( pEvent );
         fw::GameObject* pObject = pRemoveFromGameEvent->GetGameObject();
@@ -75,14 +75,14 @@ void Game::Update(float deltaTime)
 
         pObject->Update( deltaTime );
 
-        ImGui::PushID( pObject );
-        ImGui::Text( "Name: %s", pObject->GetName().c_str() );
-        ImGui::SameLine();
-        if( ImGui::Button( "Delete" ) )
-        {
-            m_pEventManager->AddEvent( new RemoveFromGameEvent( pObject ) );
-        }
-        ImGui::PopID();
+        //ImGui::PushID( pObject );
+        //ImGui::Text( "Name: %s", pObject->GetName().c_str() );
+        //ImGui::SameLine();
+        //if( ImGui::Button( "Delete" ) )
+        //{
+        //    m_pEventManager->AddEvent( new RemoveFromGameEvent( pObject ) );
+        //}
+        //ImGui::PopID();
     }
 }
 

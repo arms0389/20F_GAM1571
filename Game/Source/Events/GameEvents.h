@@ -5,10 +5,12 @@ class RemoveFromGameEvent : public fw::Event
 public:
     RemoveFromGameEvent(fw::GameObject* pObject)
     {
-        m_EventType = "RemoveFromGameEvent";
         m_pObject = pObject;
     }
-    ~RemoveFromGameEvent() {}
+    virtual ~RemoveFromGameEvent() {}
+
+    static const char* GetStaticEventType() { return "RemoveFromGameEvent"; }
+    virtual const char* GetType() override { return GetStaticEventType(); }
 
     fw::GameObject* GetGameObject() { return m_pObject; }
 

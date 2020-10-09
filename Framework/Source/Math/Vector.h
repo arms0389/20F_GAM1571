@@ -10,7 +10,7 @@ public:
 
     vec2 operator*(float o) const { return vec2( x*o, y*o ); }
 
-    vec2 operator+=(vec2& o) { x += o.x; y += o.y; return *this; }
+    vec2 operator+=(const vec2& o) { x += o.x; y += o.y; return *this; }
 
 public:
     float x;
