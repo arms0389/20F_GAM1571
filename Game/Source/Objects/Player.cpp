@@ -1,6 +1,7 @@
 #include "GamePCH.h"
 
 #include "Objects/Player.h"
+#include "Game.h"
 
 Player::Player(fw::GameCore* pGameCore, std::string name, vec2 pos, fw::Mesh* pMesh, fw::ShaderProgram* pShader)
     : fw::GameObject( pGameCore, name, pos, pMesh, pShader )
@@ -35,4 +36,16 @@ void Player::Update(float deltaTime)
     }
 
     m_Position += dir * speed * deltaTime;
+
+    // Deal with collision with the environment.
+    {
+        // Query Game for environment limits.
+        //static_cast<Game*>( m_pGameCore )->
+
+        // Apply those limits.
+        if( m_Position.x > 8 )
+        {
+            m_Position.x = 8;
+        }
+    }
 }

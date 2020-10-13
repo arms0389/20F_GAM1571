@@ -13,7 +13,8 @@ Game::~Game()
 {
     delete m_pShader;
     delete m_pMeshHuman;
-    delete m_pMeshAnimal;
+    delete m_pMeshEnemy;
+    delete m_pMeshTest;
 
     for( fw::GameObject* pObject : m_Objects )
     {
@@ -36,15 +37,35 @@ void Game::Init()
 
     // Create some meshes.
     m_pMeshHuman = new fw::Mesh( meshPrimType_Human, meshNumVerts_Human, meshAttribs_Human );
-    m_pMeshAnimal = new fw::Mesh( meshPrimType_Enemy, meshNumVerts_Enemy, meshAttribs_Enemy );
+    m_pMeshEnemy = new fw::Mesh( meshPrimType_Enemy, meshNumVerts_Enemy, meshAttribs_Enemy );
+
+    m_pMeshTest = new fw::Mesh();
+
+    int numPoints = 3;
+    {
+        //float arr[numPoints*2] = { 0 }; //{ 0,0,   1,0,   2,0 };
+        //float* arr = new float[numPoints*2];
+        std::vector<float> arr;
+
+        for( int i=0; i<numPoints*2; i++ )
+            arr.push_back( 0 );
+
+        for( int i=0; i<numPoints; i++ )
+        {
+            arr[i*2] = (float)i;
+        }
+        
+        m_pMeshTest->CreateShape( GL_POINTS, numPoints, &arr[0] );
+    }
 
     // Create some GameObjects.
     m_Objects.push_back( new Player( this, "Player", vec2( 6, 5 ), m_pMeshHuman, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 1", vec2( 0, 0 ), m_pMeshAnimal, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 2", vec2( 10, 10 ), m_pMeshAnimal, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 3", vec2( 5, 5 ), m_pMeshAnimal, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 4", vec2( 1, 1 ), m_pMeshAnimal, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 5", vec2( 1, 9 ), m_pMeshAnimal, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 1", vec2( 0, 0 ), m_pMeshEnemy, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 2", vec2( 10, 10 ), m_pMeshEnemy, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 3", vec2( 5, 5 ), m_pMeshEnemy, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 4", vec2( 1, 1 ), m_pMeshEnemy, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 5", vec2( 1, 9 ), m_pMeshEnemy, m_pShader ) );
+    m_Objects.push_back( new fw::GameObject( this, "Test", vec2( 3, 6 ), m_pMeshTest, m_pShader ) );
 }
 
 void Game::OnEvent(fw::Event* pEvent)
