@@ -1,5 +1,7 @@
 #pragma once
 
+class PlayerController;
+
 class Game : public fw::GameCore
 {
 public:
@@ -13,15 +15,16 @@ public:
 
 protected:
     fw::ImGuiManager* m_pImGuiManager = nullptr;
-    fw::EventManager* m_pEventManager = nullptr;
 
     fw::ShaderProgram* m_pShader = nullptr;
     fw::Mesh* m_pMeshHuman = nullptr;
     fw::Mesh* m_pMeshEnemy = nullptr;
     fw::Mesh* m_pMeshTest = nullptr;
 
+    PlayerController* m_pPlayerController = nullptr;
+
     std::vector<fw::GameObject*> m_Objects;
 
-    // Debug variables.
+    // Settings.
     bool m_VSyncEnabled = true;
 };

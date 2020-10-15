@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "Objects/Player.h"
+#include "Objects/PlayerController.h"
 #include "Objects/Shapes.h"
 #include "Events/GameEvents.h"
 
@@ -21,6 +22,8 @@ Game::~Game()
     {
         delete pObject;
     }
+
+    delete m_pPlayerController;
 
     delete m_pEventManager;
     delete m_pImGuiManager;
@@ -59,8 +62,10 @@ void Game::Init()
         m_pMeshTest->CreateShape( GL_POINTS, numPoints, &arr[0] );
     }
 
+    m_pPlayerController = new PlayerController();
+
     // Create some GameObjects.
-    m_Objects.push_back( new Player(         this, "Player",  vec2( 6, 5 ),   m_pMeshHuman, m_pShader, vec4::Green() ) );
+    m_Objects.push_back( new Player( this, m_pPlayerController, "Player", vec2( 6, 5 ), m_pMeshHuman, m_pShader, vec4::Green() ) );
     m_Objects.push_back( new fw::GameObject( this, "Enemy 1", vec2( 0, 0 ),   m_pMeshEnemy, m_pShader, vec4::Red()   ) );
     m_Objects.push_back( new fw::GameObject( this, "Enemy 2", vec2( 10, 10 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
     m_Objects.push_back( new fw::GameObject( this, "Enemy 3", vec2( 5, 5 ),   m_pMeshEnemy, m_pShader, vec4::Red()   ) );
@@ -71,6 +76,8 @@ void Game::Init()
 
 void Game::OnEvent(fw::Event* pEvent)
 {
+    m_pPlayerController->OnEvent( pEvent );
+
     if( pEvent->GetType() == RemoveFromGameEvent::GetStaticEventType() )
     {
         RemoveFromGameEvent* pRemoveFromGameEvent = static_cast<RemoveFromGameEvent*>( pEvent );
@@ -109,8 +116,7 @@ void Game::Update(float deltaTime)
 
     // Debug imgui stuff.
     {
-        // Enable/Disable vsync.
-        if( ImGui::Checkbox( "V-sync", &m_VSyncEnabled ) )
+        if( ImGui::Checkbox( "VSync", &m_VSyncEnabled ) )
         {
             wglSwapInterval( m_VSyncEnabled ? 1 : 0 );
         }

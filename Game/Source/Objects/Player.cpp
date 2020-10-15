@@ -1,10 +1,12 @@
 #include "GamePCH.h"
 
 #include "Objects/Player.h"
+#include "Objects/PlayerController.h"
 #include "Game.h"
 
-Player::Player(fw::GameCore* pGameCore, std::string name, vec2 pos, fw::Mesh* pMesh, fw::ShaderProgram* pShader, vec4 color)
+Player::Player(fw::GameCore* pGameCore, PlayerController* pPlayerController, std::string name, vec2 pos, fw::Mesh* pMesh, fw::ShaderProgram* pShader, vec4 color)
     : fw::GameObject( pGameCore, name, pos, pMesh, pShader, color )
+    , m_pPlayerController( pPlayerController )
 {
 }
 
@@ -18,21 +20,21 @@ void Player::Update(float deltaTime)
 
     vec2 dir;
 
-    if( m_pGameCore->GetFramework()->IsKeyDown( 'A' ) )
-    {
-        dir.x = -1;
-    }
-    if( m_pGameCore->GetFramework()->IsKeyDown( 'D' ) )
-    {
-        dir.x = 1;
-    }
-    if( m_pGameCore->GetFramework()->IsKeyDown( 'W' ) )
+    if( m_pPlayerController->IsUpHeld() )
     {
         dir.y = 1;
     }
     if( m_pGameCore->GetFramework()->IsKeyDown( 'S' ) )
     {
         dir.y = -1;
+    }
+    if( m_pPlayerController->IsLeftHeld() )
+    {
+        dir.x = -1;
+    }
+    if( m_pPlayerController->IsRightHeld() )
+    {
+        dir.x = 1;
     }
 
     m_Position += dir * speed * deltaTime;
