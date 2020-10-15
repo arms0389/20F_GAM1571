@@ -21,4 +21,7 @@ protected:
     fw::Mesh* m_pMeshTest = nullptr;
 
     std::vector<fw::GameObject*> m_Objects;
+
+    // Debug variables.
+    bool m_VSyncEnabled = true;
 };

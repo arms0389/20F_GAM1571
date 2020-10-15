@@ -11,7 +11,7 @@ class GameCore;
 class GameObject
 {
 public:
-    GameObject(GameCore* pGameCore, std::string name, vec2 pos, Mesh* pMesh, ShaderProgram* pShader);
+    GameObject(GameCore* pGameCore, std::string name, vec2 pos, Mesh* pMesh, ShaderProgram* pShader, vec4 color);
     virtual ~GameObject();
 
     virtual void Update(float deltaTime);
@@ -28,6 +28,7 @@ protected:
 
     Mesh* m_pMesh = nullptr;
     ShaderProgram* m_pShader = nullptr;
+    vec4 m_Color = vec4(1,1,1,1);
 };
 
 } // namespace fw

@@ -7,6 +7,7 @@
 
 Game::Game(fw::FWCore* pFramework) : fw::GameCore( pFramework )
 {
+    wglSwapInterval( m_VSyncEnabled ? 1 : 0 );
 }
 
 Game::~Game()
@@ -59,13 +60,13 @@ void Game::Init()
     }
 
     // Create some GameObjects.
-    m_Objects.push_back( new Player( this, "Player", vec2( 6, 5 ), m_pMeshHuman, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 1", vec2( 0, 0 ), m_pMeshEnemy, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 2", vec2( 10, 10 ), m_pMeshEnemy, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 3", vec2( 5, 5 ), m_pMeshEnemy, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 4", vec2( 1, 1 ), m_pMeshEnemy, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 5", vec2( 1, 9 ), m_pMeshEnemy, m_pShader ) );
-    m_Objects.push_back( new fw::GameObject( this, "Test", vec2( 3, 6 ), m_pMeshTest, m_pShader ) );
+    m_Objects.push_back( new Player(         this, "Player",  vec2( 6, 5 ),   m_pMeshHuman, m_pShader, vec4::Green() ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 1", vec2( 0, 0 ),   m_pMeshEnemy, m_pShader, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 2", vec2( 10, 10 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 3", vec2( 5, 5 ),   m_pMeshEnemy, m_pShader, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 4", vec2( 1, 1 ),   m_pMeshEnemy, m_pShader, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 5", vec2( 1, 9 ),   m_pMeshEnemy, m_pShader, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Test",    vec2( 3, 6 ),   m_pMeshTest,  m_pShader, vec4::Blue()  ) );
 }
 
 void Game::OnEvent(fw::Event* pEvent)
@@ -105,11 +106,20 @@ void Game::Update(float deltaTime)
         //}
         //ImGui::PopID();
     }
+
+    // Debug imgui stuff.
+    {
+        // Enable/Disable vsync.
+        if( ImGui::Checkbox( "V-sync", &m_VSyncEnabled ) )
+        {
+            wglSwapInterval( m_VSyncEnabled ? 1 : 0 );
+        }
+    }
 }
 
 void Game::Draw()
 {
-    glClearColor( 0, 1, 0, 0 );
+    glClearColor( 0, 0, 0.2f, 0 );
     glClear( GL_COLOR_BUFFER_BIT );
 
     glPointSize( 10 );
