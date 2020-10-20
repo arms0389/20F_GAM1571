@@ -98,20 +98,13 @@ void Game::Update(float deltaTime)
     m_pImGuiManager->StartFrame( deltaTime );
     ImGui::ShowDemoWindow();
 
+    // Display framerate.
+    ImGui::Text( "%0.2f", 1/deltaTime );
+
     for( auto it = m_Objects.begin(); it != m_Objects.end(); it++ )
     {
         fw::GameObject* pObject = *it;
-
         pObject->Update( deltaTime );
-
-        //ImGui::PushID( pObject );
-        //ImGui::Text( "Name: %s", pObject->GetName().c_str() );
-        //ImGui::SameLine();
-        //if( ImGui::Button( "Delete" ) )
-        //{
-        //    m_pEventManager->AddEvent( new RemoveFromGameEvent( pObject ) );
-        //}
-        //ImGui::PopID();
     }
 
     // Debug imgui stuff.
@@ -133,7 +126,6 @@ void Game::Draw()
     for( auto it = m_Objects.begin(); it != m_Objects.end(); it++ )
     {
         fw::GameObject* pObject = *it;
-
         pObject->Draw();
     }
 
