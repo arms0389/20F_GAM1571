@@ -20,22 +20,24 @@ void Player::Update(float deltaTime)
 
     vec2 dir;
 
-    if( m_pPlayerController->IsUpHeld() )
+    if( m_pPlayerController->IsHeld( PlayerController::Mask::Up ) )
     {
-        dir.y = 1;
+        dir.y += 1;
     }
-    if( m_pGameCore->GetFramework()->IsKeyDown( 'S' ) )
+    if( m_pPlayerController->IsHeld( PlayerController::Mask::Down ) )
     {
-        dir.y = -1;
+        dir.y += -1;
     }
-    if( m_pPlayerController->IsLeftHeld() )
+    if( m_pPlayerController->IsHeld( PlayerController::Mask::Left ) )
     {
-        dir.x = -1;
+        dir.x += -1;
     }
-    if( m_pPlayerController->IsRightHeld() )
+    if( m_pPlayerController->IsHeld( PlayerController::Mask::Right ) )
     {
-        dir.x = 1;
+        dir.x += 1;
     }
+
+    //dir.Normalize();
 
     m_Position += dir * speed * deltaTime;
 
