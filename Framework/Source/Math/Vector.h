@@ -2,6 +2,11 @@
 
 namespace fw {
 
+inline bool fequal(float a, float b, float epsilon = 0.00001f)
+{
+    return( fabsf(a-b) < epsilon );
+}
+
 class vec2
 {
 public:
@@ -11,6 +16,8 @@ public:
     vec2 operator*(float o) const { return vec2( x*o, y*o ); }
 
     vec2 operator+=(const vec2& o) { x += o.x; y += o.y; return *this; }
+
+    bool operator==(const vec2& o) const { return( fequal( x, o.x ) && fequal( y, o.y ) ); }
 
 public:
     float x;

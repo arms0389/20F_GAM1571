@@ -31,6 +31,10 @@ Game::~Game()
 
 void Game::Init()
 {
+    // OpenGL Settings.
+    glEnable( GL_BLEND );
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
     m_pImGuiManager = new fw::ImGuiManager( m_pFramework );
     m_pImGuiManager->Init();
 
@@ -65,15 +69,15 @@ void Game::Init()
     m_pPlayerController = new PlayerController();
 
     // Create some GameObjects.
-    m_pPlayer = new Player( this, m_pPlayerController, "Player", vec2( 6, 5 ), m_pMeshHuman, m_pShader, vec4::Green() );
+    m_pPlayer = new Player( this, m_pPlayerController, "Player", vec2( 6, 5 ), m_pMeshHuman, m_pShader, vec4(0.0f, 1.0f, 0.0f, 0.5f) );
 
-    m_Objects.push_back( m_pPlayer );
     m_Objects.push_back( new fw::GameObject( this, "Enemy 1", vec2(  0,  0 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
     m_Objects.push_back( new fw::GameObject( this, "Enemy 2", vec2( 10, 10 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
     m_Objects.push_back( new fw::GameObject( this, "Enemy 3", vec2(  5,  5 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
     m_Objects.push_back( new fw::GameObject( this, "Enemy 4", vec2(  1,  1 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
     m_Objects.push_back( new fw::GameObject( this, "Enemy 5", vec2(  1,  9 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
     m_Objects.push_back( new fw::GameObject( this, "Test",    vec2(  3,  6 ), m_pMeshTest,  m_pShader, vec4::Blue()  ) );
+    m_Objects.push_back( m_pPlayer );
 }
 
 void Game::StartFrame(float deltaTime)
@@ -113,6 +117,13 @@ void Game::Update(float deltaTime)
     {
         fw::GameObject* pObject = *it;
         pObject->Update( deltaTime );
+    }
+
+    // Check for collisions between objects.
+    // Single For loop checking the player against everything else
+    //   or
+    // Nested For loop checking everything against everything else
+    {
     }
 
     // Debug imgui stuff.
