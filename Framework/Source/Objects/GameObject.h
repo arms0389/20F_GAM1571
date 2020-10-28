@@ -18,6 +18,7 @@ public:
     virtual void Draw();
 
     std::string GetName() { return m_Name; }
+    vec2 GetPosition() { return m_Position; }
 
 protected:
     GameCore* m_pGameCore = nullptr;

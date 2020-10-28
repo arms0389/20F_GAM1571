@@ -13,11 +13,38 @@ public:
     vec2() { x = 0; y = 0; }
     vec2(float nx, float ny) { x = nx; y = ny; }
 
-    vec2 operator*(float o) const { return vec2( x*o, y*o ); }
+    void Set(float nx, float ny) { x = nx; y = ny; }
 
-    vec2 operator+=(const vec2& o) { x += o.x; y += o.y; return *this; }
+    vec2 operator+(float o) const { return vec2( x+o, y+o ); }
+    vec2 operator-(float o) const { return vec2( x-o, y-o ); }
+    vec2 operator*(float o) const { return vec2( x*o, y*o ); }
+    vec2 operator/(float o) const { return vec2( x/o, y/o ); }
+
+    vec2 operator+(const vec2& o) const { return vec2( x+o.x, y+o.y ); }
+    vec2 operator-(const vec2& o) const { return vec2( x-o.x, y-o.y ); }
+    vec2 operator*(const vec2& o) const { return vec2( x*o.x, y*o.y ); }
+    vec2 operator/(const vec2& o) const { return vec2( x/o.x, y/o.y ); }
+
+    vec2& operator+=(float o) { x += o; y += o; return *this; }
+    vec2& operator-=(float o) { x -= o; y -= o; return *this; }
+    vec2& operator*=(float o) { x *= o; y *= o; return *this; }
+    vec2& operator/=(float o) { x /= o; y /= o; return *this; }
+
+    vec2& operator+=(const vec2& o) { x += o.x; y += o.y; return *this; }
+    vec2& operator-=(const vec2& o) { x -= o.x; y -= o.y; return *this; }
+    vec2& operator*=(const vec2& o) { x *= o.x; y *= o.y; return *this; }
+    vec2& operator/=(const vec2& o) { x /= o.x; y /= o.y; return *this; }
 
     bool operator==(const vec2& o) const { return( fequal( x, o.x ) && fequal( y, o.y ) ); }
+    bool operator!=(const vec2& o) const { return( !fequal( x, o.x ) || !fequal( y, o.y ) ); }
+
+    float GetLength() const { return sqrtf( x*x + y*y ); }
+    float DistanceFrom(const vec2& o) const { return (*this - o).GetLength(); }
+
+    void Normalize() { float mag = GetLength(); x /= mag; y /= mag; }
+    vec2 GetNormalized() const { float mag = GetLength(); return vec2( x/mag, y/mag ); }
+
+    float Dot(const vec2& o) const { return (x*o.x + y*o.y); }
 
 public:
     float x;
