@@ -38,6 +38,8 @@ public:
     bool operator==(const vec2& o) const { return( fequal( x, o.x ) && fequal( y, o.y ) ); }
     bool operator!=(const vec2& o) const { return( !fequal( x, o.x ) || !fequal( y, o.y ) ); }
 
+    vec2 operator-() const { return vec2( -x, -y ); }
+
     float GetLength() const { return sqrtf( x*x + y*y ); }
     float DistanceFrom(const vec2& o) const { return (*this - o).GetLength(); }
 
@@ -50,6 +52,8 @@ public:
     float x;
     float y;
 };
+
+inline vec2 operator*(float scalar, const vec2& vector) { return vec2( scalar*vector.x, scalar*vector.y ); }
 
 class vec4
 {

@@ -15,4 +15,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     delete pGame;
     delete pFramework;
+
+    MyMemory_ValidateAllocations( true );
 }
