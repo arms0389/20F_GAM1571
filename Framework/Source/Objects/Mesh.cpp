@@ -10,7 +10,7 @@ Mesh::Mesh()
 {
 }
 
-Mesh::Mesh(int primitiveType, int numVertices, const float* pVertices)
+Mesh::Mesh(int primitiveType, int numVertices, const VertexFormat* pVertices)
 {
     CreateShape( primitiveType, numVertices, pVertices );
 }
@@ -20,7 +20,7 @@ Mesh::~Mesh()
     glDeleteBuffers( 1, &m_VBO );
 }
 
-void Mesh::CreateShape(int primitiveType, int numVertices, const float* pVertices)
+void Mesh::CreateShape(int primitiveType, int numVertices, const VertexFormat* pVertices)
 {
     // Delete the old buffer if we had one.
     glDeleteBuffers( 1, &m_VBO );
@@ -35,8 +35,7 @@ void Mesh::CreateShape(int primitiveType, int numVertices, const float* pVertice
     m_PrimitiveType = primitiveType;
 
     // Copy our attribute data into the VBO.
-    int numAttributeComponents = m_NumVertices*2; // x & y for each vertex.
-    glBufferData( GL_ARRAY_BUFFER, sizeof(float)*numAttributeComponents, pVertices, GL_STATIC_DRAW );
+    glBufferData( GL_ARRAY_BUFFER, sizeof(VertexFormat)*m_NumVertices, pVertices, GL_STATIC_DRAW );
 }
 
 void Mesh::SetUniform1f(ShaderProgram* pShader, char* name, float value)
@@ -69,7 +68,7 @@ void Mesh::Draw(vec2 pos, ShaderProgram* pShader, vec4 color)
     glEnableVertexAttribArray( loc );
 
     // Describe the attributes in the VBO to OpenGL.
-    glVertexAttribPointer( loc, 2, GL_FLOAT, GL_FALSE, 8, (void*)0 );
+    glVertexAttribPointer( loc, 2, GL_FLOAT, GL_FALSE, 16, (void*)0 );
 
     // Setup our uniforms.
     {

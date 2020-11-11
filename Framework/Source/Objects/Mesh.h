@@ -6,14 +6,22 @@ namespace fw {
 
 class ShaderProgram;
 
+struct VertexFormat
+{
+    float x;
+    float y;
+    float u;
+    float v;
+};
+
 class Mesh
 {
 public:
     Mesh();
-    Mesh(int primitiveType, int numVertices, const float* pVertices);
+    Mesh(int primitiveType, int numVertices, const VertexFormat* pVertices);
     virtual ~Mesh();
 
-    void CreateShape(int primitiveType, int numVertices, const float* pVertices);
+    void CreateShape(int primitiveType, int numVertices, const VertexFormat* pVertices);
 
     void SetUniform1f(ShaderProgram* pShader, char* name, float value);
     void SetUniform2f(ShaderProgram* pShader, char* name, vec2 value);
