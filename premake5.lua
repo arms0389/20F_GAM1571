@@ -3,7 +3,7 @@ workspace "Game"
 	platforms		{ "x64" }
 	location		"build"
 	characterset	"MBCS"
-	startproject	"Game"
+	startproject	"GameTilemap"
 
 	filter "configurations:Debug"
 		symbols		"on"
@@ -73,6 +73,7 @@ project "Framework"
 		"Framework/Source/**.h",
 		"Framework/Libraries/imgui/*.cpp",
 		"Framework/Libraries/imgui/*.h",
+		"Framework/Libraries/stb/*.h",
 	}
 
 	includedirs {

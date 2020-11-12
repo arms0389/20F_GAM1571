@@ -55,11 +55,11 @@ void Game::Init()
     // Create some GameObjects.
     m_pPlayer = new Player( this, m_pPlayerController, "Player", vec2( 6, 5 ), m_pMeshHuman, m_pShader, vec4(0.0f, 1.0f, 0.0f, 0.5f) );
 
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 1", vec2(  0,  0 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 2", vec2( 10, 10 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 3", vec2(  5,  5 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 4", vec2(  1,  1 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
-    m_Objects.push_back( new fw::GameObject( this, "Enemy 5", vec2(  1,  9 ), m_pMeshEnemy, m_pShader, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 1", vec2(  0,  0 ), m_pMeshEnemy, m_pShader, nullptr, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 2", vec2( 10, 10 ), m_pMeshEnemy, m_pShader, nullptr, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 3", vec2(  5,  5 ), m_pMeshEnemy, m_pShader, nullptr, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 4", vec2(  1,  1 ), m_pMeshEnemy, m_pShader, nullptr, vec4::Red()   ) );
+    m_Objects.push_back( new fw::GameObject( this, "Enemy 5", vec2(  1,  9 ), m_pMeshEnemy, m_pShader, nullptr, vec4::Red()   ) );
     //m_Objects.push_back( new fw::GameObject( this, "Test",    vec2(  3,  6 ), m_pMeshTest,  m_pShader, vec4::Blue()  ) );
     m_Objects.push_back( m_pPlayer );
 }

@@ -22,6 +22,10 @@ protected:
 
     PlayerController* m_pPlayerController = nullptr;
 
+    std::map<std::string, fw::ShaderProgram*> m_pShaders;
+    std::map<std::string, fw::Mesh*> m_pMeshes;
+    std::map<std::string, fw::Texture*> m_pTextures;
+
     Player* m_pPlayer = nullptr;
     std::vector<fw::GameObject*> m_Objects;
 

@@ -7,11 +7,12 @@ namespace fw {
 class Mesh;
 class ShaderProgram;
 class GameCore;
+class Texture;
 
 class GameObject
 {
 public:
-    GameObject(GameCore* pGameCore, std::string name, vec2 pos, Mesh* pMesh, ShaderProgram* pShader, vec4 color);
+    GameObject(GameCore* pGameCore, std::string name, vec2 pos, Mesh* pMesh, ShaderProgram* pShader, fw::Texture* pTexture, vec4 color);
     virtual ~GameObject();
 
     virtual void Update(float deltaTime);
@@ -19,6 +20,8 @@ public:
 
     std::string GetName() { return m_Name; }
     vec2 GetPosition() { return m_Position; }
+
+    void SetTexture(Texture* pTexture) { m_pTexture = pTexture; }
 
 protected:
     GameCore* m_pGameCore = nullptr;
@@ -29,6 +32,7 @@ protected:
 
     Mesh* m_pMesh = nullptr;
     ShaderProgram* m_pShader = nullptr;
+    Texture* m_pTexture = nullptr;
     vec4 m_Color = vec4(1,1,1,1);
 };
 
