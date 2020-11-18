@@ -46,6 +46,7 @@ project "GameTilemap"
 		"GameTilemap/Source/**.h",
 		"GameTilemap/Data/**.vert",
 		"GameTilemap/Data/**.frag",
+		"GameTilemap/Data/**.json",
 		"premake5.lua",
 		".gitignore",
 		"GenerateProjectFiles.bat",

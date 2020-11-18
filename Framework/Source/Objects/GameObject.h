@@ -34,6 +34,9 @@ protected:
     ShaderProgram* m_pShader = nullptr;
     Texture* m_pTexture = nullptr;
     vec4 m_Color = vec4(1,1,1,1);
+
+    vec2 m_UVScale = vec2( 1, 1 );
+    vec2 m_UVOffset = vec2( 0, 0 );
 };
 
 } // namespace fw

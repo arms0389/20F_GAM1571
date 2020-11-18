@@ -37,6 +37,9 @@ void Player::Update(float deltaTime)
         dir.x += 1;
     }
 
+    m_UVScale = vec2( 64.0/1024.0, 64.0/512.0 );
+    m_UVOffset = vec2( 780.0/1024.0, 383.0/512.0 );
+
     //dir.Normalize();
 
     m_Position += dir * speed * deltaTime;

@@ -3,6 +3,8 @@ attribute vec2 a_Position;
 attribute vec2 a_UVCoord; // Input from VBO in C++.
 
 uniform vec2 u_ObjectPos;
+uniform vec2 u_UVScale;
+uniform vec2 u_UVOffset;
 
 varying vec2 v_UVCoord; // Output to frag shader.
 
@@ -18,7 +20,7 @@ void main()
     pos /= 5.0;
     pos -= 1.0;
 
-    v_UVCoord = a_UVCoord;
+    v_UVCoord = a_UVCoord * u_UVScale + u_UVOffset;
 
     gl_Position = vec4( pos, 0, 1 );
 }

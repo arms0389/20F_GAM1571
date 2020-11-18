@@ -30,7 +30,7 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::Draw()
 {
-    m_pMesh->Draw( m_Position, m_pShader, m_pTexture, m_Color );
+    m_pMesh->Draw( m_Position, m_pShader, m_pTexture, m_Color, m_UVScale, m_UVOffset );
 }
 
 } // namespace fw

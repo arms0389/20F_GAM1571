@@ -56,10 +56,10 @@ void Game::Init()
     m_pShaders["Basic"] = new fw::ShaderProgram( "Data/Basic.vert", "Data/Basic.frag" );
 
     // Create some meshes.
-    m_pMeshes["Player"] = new fw::Mesh( meshPrimType_Human, meshNumVerts_Human, meshAttribs_Human );
+    m_pMeshes["Player"] = new fw::Mesh( meshPrimType_Sprite, meshNumVerts_Sprite, meshAttribs_Sprite );
 
     // Load some textures.
-    m_pTextures["Test"] = new fw::Texture( "Data/Textures/test.png" );
+    m_pTextures["Test"] = new fw::Texture( "Data/Textures/Sokoban.png" );
 
     // Create some GameObjects.
     m_pPlayer = new Player( this, m_pPlayerController, "Player", vec2(5,5), 
