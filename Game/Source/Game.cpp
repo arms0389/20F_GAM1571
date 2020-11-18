@@ -71,7 +71,7 @@ void Game::StartFrame(float deltaTime)
     m_pPlayerController->StartFrame();
 
     // Process our events.
-    m_pEventManager->DispatchAllEvents( this );
+    m_pEventManager->DispatchAllEvents( deltaTime, this );
 }
 
 void Game::OnEvent(fw::Event* pEvent)

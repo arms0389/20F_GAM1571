@@ -74,7 +74,7 @@ void Game::StartFrame(float deltaTime)
     m_pPlayerController->StartFrame();
 
     // Process our events.
-    m_pEventManager->DispatchAllEvents( this );
+    m_pEventManager->DispatchAllEvents( deltaTime, this );
 }
 
 void Game::OnEvent(fw::Event* pEvent)
@@ -111,7 +111,7 @@ void Game::Update(float deltaTime)
             wglSwapInterval( m_VSyncEnabled ? 1 : 0 );
         }
     }
-}
+        }
 
 void Game::Draw()
 {

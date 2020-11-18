@@ -8,33 +8,33 @@ workspace "Game"
 	filter "configurations:Debug"
 		symbols		"on"
 
-project "Game"
-	kind		"WindowedApp"
-	location	"build/Game"
-	debugdir	"Game"
-
-	files {
-		"Game/Source/**.cpp",
-		"Game/Source/**.h",
-		"Game/Data/**.vert",
-		"Game/Data/**.frag",
-		"premake5.lua",
-		".gitignore",
-		"GenerateProjectFiles.bat",
-		"readme.txt",
-	}
-
-	includedirs {
-		"Game/Source",
-	}
-
-	links {
-		"Framework",
-		"opengl32",
-	}
-
-	pchheader "GamePCH.h"
-	pchsource "Game/Source/WinMain.cpp"
+--project "Game"
+--	kind		"WindowedApp"
+--	location	"build/Game"
+--	debugdir	"Game"
+--
+--	files {
+--		"Game/Source/**.cpp",
+--		"Game/Source/**.h",
+--		"Game/Data/**.vert",
+--		"Game/Data/**.frag",
+--		"premake5.lua",
+--		".gitignore",
+--		"GenerateProjectFiles.bat",
+--		"readme.txt",
+--	}
+--
+--	includedirs {
+--		"Game/Source",
+--	}
+--
+--	links {
+--		"Framework",
+--		"opengl32",
+--	}
+--
+--	pchheader "GamePCH.h"
+--	pchsource "Game/Source/WinMain.cpp"
 
 project "GameTilemap"
 	kind		"WindowedApp"
