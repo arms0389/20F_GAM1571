@@ -37,6 +37,8 @@ Game::~Game()
 
     delete m_pEventManager;
     delete m_pImGuiManager;
+
+    delete m_pSpriteSheet["Player"];
 }
 
 void Game::Init()
@@ -61,9 +63,11 @@ void Game::Init()
     // Load some textures.
     m_pTextures["Test"] = new fw::Texture( "Data/Textures/Sokoban.png" );
 
+    m_pSpriteSheet["Player"] = new fw::SpriteSheet("Data/Textures/Sokoban.json");
+
     // Create some GameObjects.
     m_pPlayer = new Player( this, m_pPlayerController, "Player", vec2(5,5), 
-        m_pMeshes["Player"], m_pShaders["Basic"], m_pTextures["Test"], vec4::Green() );
+        m_pMeshes["Player"], m_pShaders["Basic"], m_pTextures["Test"], vec4::Green(), m_pSpriteSheet["Player"]);
     m_Objects.push_back( m_pPlayer );
 }
 
