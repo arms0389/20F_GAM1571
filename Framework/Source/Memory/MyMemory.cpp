@@ -121,6 +121,7 @@ void operator delete(void* m)
         return;
 
     MemObject* mo = (MemObject*)(((char*)m) - sizeof(MemObject));
+
     assert( mo->m_type == NewType::Regular );
     mo->Remove();
 

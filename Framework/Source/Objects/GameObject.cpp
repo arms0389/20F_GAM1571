@@ -28,9 +28,14 @@ void GameObject::Update(float deltaTime)
 {
 }
 
+void GameObject::SetScale(float scale)
+{
+    m_Scale = scale;
+}
+
 void GameObject::Draw()
 {
-    m_pMesh->Draw( m_Position, m_pShader, m_pTexture, m_Color, m_UVScale, m_UVOffset );
+    m_pMesh->Draw( m_Position, m_Scale, m_pShader, m_pTexture, m_Color, m_UVScale, m_UVOffset );
 }
 
 } // namespace fw

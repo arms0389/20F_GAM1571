@@ -1,9 +1,20 @@
 #include "GamePCH.h"
-#include "Tilemap/TileMap.h"
+#include "Layout.h"
 
-//using TT = Tilemap::TileType;
+using TT = TileMap::TileType;
 
-//const Tilemap::TileType Level1Layout[] =
-//{
+ const int level1Width = 6;
+ const int level1Height = 9;
 
-//}
+ const TileMap::TileType Level1Layout[] =
+ {
+     TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Floor,
+     TT::Floor, TT::Wall , TT::Floor, TT::Floor, TT::Wall , TT::Floor,
+     TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Floor,
+     TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Floor,
+     TT::Wall,  TT::Wall , TT::Wall,  TT::Floor, TT::Wall , TT::Wall,
+     TT::Wall,  TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Wall,
+     TT::Wall,  TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Wall,
+     TT::Wall,  TT::Floor, TT::Floor, TT::Floor, TT::Floor, TT::Wall,
+     TT::Wall,  TT::Wall,  TT::Wall,  TT::Wall,  TT::Wall,  TT::Wall
+ };

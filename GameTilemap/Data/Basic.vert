@@ -1,7 +1,7 @@
 
 attribute vec2 a_Position;
 attribute vec2 a_UVCoord; // Input from VBO in C++.
-
+uniform float u_Scale;
 uniform vec2 u_ObjectPos;
 uniform vec2 u_UVScale;
 uniform vec2 u_UVOffset;
@@ -12,7 +12,7 @@ void main()
 {
     vec2 pos = a_Position;
     
-    pos *= 1; // Object Scale.
+    pos *= u_Scale; // Object Scale.
 
     pos += u_ObjectPos;
 

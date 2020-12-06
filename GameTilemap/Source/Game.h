@@ -2,7 +2,7 @@
 
 class PlayerController;
 class Player;
-
+class TileMap;
 class Game : public fw::GameCore
 {
 public:
@@ -30,6 +30,7 @@ protected:
     Player* m_pPlayer = nullptr;
     std::vector<fw::GameObject*> m_Objects;
 
+    TileMap* m_pTileMap;
     // Settings.
     bool m_VSyncEnabled = true;
 };

@@ -5,6 +5,8 @@
 #include "Objects/PlayerController.h"
 #include "Objects/Shapes.h"
 #include "Events/GameEvents.h"
+#include "TileMap/TileMap.h"
+#include "TileMap/Layout.h"
 
 Game::Game(fw::FWCore* pFramework) : fw::GameCore( pFramework )
 {
@@ -33,6 +35,8 @@ Game::~Game()
         delete pObject;
     }
 
+    delete m_pTileMap;
+
     delete m_pPlayerController;
 
     delete m_pEventManager;
@@ -59,6 +63,7 @@ void Game::Init()
 
     // Create some meshes.
     m_pMeshes["Player"] = new fw::Mesh( meshPrimType_Sprite, meshNumVerts_Sprite, meshAttribs_Sprite );
+    m_pMeshes["Tiles"] = new fw::Mesh( meshPrimType_Sprite, meshNumVerts_Sprite, meshAttribs_Sprite );
 
     // Load some textures.
     m_pTextures["Test"] = new fw::Texture( "Data/Textures/Sokoban.png" );
@@ -68,7 +73,10 @@ void Game::Init()
     // Create some GameObjects.
     m_pPlayer = new Player( this, m_pPlayerController, "Player", vec2(5,5), 
         m_pMeshes["Player"], m_pShaders["Basic"], m_pTextures["Test"], vec4::Green(), m_pSpriteSheet["Player"]);
+    m_pPlayer->SetScale(1.0f);
     m_Objects.push_back( m_pPlayer );
+
+    m_pTileMap = new TileMap( vec2(2,1), 1.25f, Level1Layout, level1Width, level1Height, m_pShaders["Basic"], m_pTextures["Test"], m_pSpriteSheet["Player"],m_pMeshes["Tiles"]);
 }
 
 void Game::StartFrame(float deltaTime)
@@ -124,6 +132,8 @@ void Game::Draw()
 
     glPointSize( 10 );
     
+    m_pTileMap->Draw();
+
     for( auto it = m_Objects.begin(); it != m_Objects.end(); it++ )
     {
         fw::GameObject* pObject = *it;
